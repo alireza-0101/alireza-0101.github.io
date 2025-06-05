@@ -152,11 +152,7 @@
             if ("undefined" == typeof localStorage) return "light"
             {
               let e = localStorage.getItem("theme")
-              return "dark" === e || "light" === e
-                ? e
-                : window.matchMedia("(prefers-color-scheme: dark)").matches
-                ? "dark"
-                : "light"
+              return "dark" === e || "light" === e ? e : "light"
             }
           })
         return (
@@ -283,14 +279,14 @@
             onClick: M,
             onMouseEnter: N,
             onTouchStart: S,
-            legacyBehavior: k = !1,
-            onNavigate: A,
-            ref: C,
+            legacyBehavior: A = !1,
+            onNavigate: C,
+            ref: k,
             unstable_dynamicOnHover: L,
             ...T
           } = e
         ;(t = P),
-          k &&
+          A &&
             ("string" == typeof t || "number" == typeof t) &&
             (t = (0, o.jsx)("a", { children: t }))
         let I = u.default.useContext(l.AppRouterContext),
@@ -300,8 +296,8 @@
             let e = g(v)
             return { href: e, as: E ? g(E) : e }
           }, [v, E])
-        k && (r = u.default.Children.only(t))
-        let F = k ? r && "object" == typeof r && r.ref : C,
+        A && (r = u.default.Children.only(t))
+        let F = A ? r && "object" == typeof r && r.ref : k,
           K = u.default.useCallback(
             (e) => (
               null !== I && (b.current = (0, d.mountLinkInstance)(e, Z, I, U, R, m)),
@@ -316,8 +312,8 @@
           z = {
             ref: (0, s.useMergedRef)(K, F),
             onClick(e) {
-              k || "function" != typeof M || M(e),
-                k && r.props && "function" == typeof r.props.onClick && r.props.onClick(e),
+              A || "function" != typeof M || M(e),
+                A && r.props && "function" == typeof r.props.onClick && r.props.onClick(e),
                 I &&
                   (e.defaultPrevented ||
                     (function (e, t, r, n, o, a, l) {
@@ -365,19 +361,19 @@
                             )
                           })
                       }
-                    })(e, Z, D, b, O, w, A))
+                    })(e, Z, D, b, O, w, C))
             },
             onMouseEnter(e) {
-              k || "function" != typeof N || N(e),
-                k &&
+              A || "function" != typeof N || N(e),
+                A &&
                   r.props &&
                   "function" == typeof r.props.onMouseEnter &&
                   r.props.onMouseEnter(e),
                 I && R && (0, d.onNavigationIntent)(e.currentTarget, !0 === L)
             },
             onTouchStart: function (e) {
-              k || "function" != typeof S || S(e),
-                k &&
+              A || "function" != typeof S || S(e),
+                A &&
                   r.props &&
                   "function" == typeof r.props.onTouchStart &&
                   r.props.onTouchStart(e),
@@ -387,9 +383,9 @@
         return (
           (0, c.isAbsoluteUrl)(D)
             ? (z.href = D)
-            : (k && !_ && ("a" !== r.type || "href" in r.props)) ||
+            : (A && !_ && ("a" !== r.type || "href" in r.props)) ||
               (z.href = (0, f.addBasePath)(D)),
-          (n = k ? u.default.cloneElement(r, z) : (0, o.jsx)("a", { ...T, ...z, children: t })),
+          (n = A ? u.default.cloneElement(r, z) : (0, o.jsx)("a", { ...T, ...z, children: t })),
           (0, o.jsx)(y.Provider, { value: a, children: n })
         )
       }
